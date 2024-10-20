@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hmmmmm</title> <!-- Title changed to "Hmmmmm" -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f8f8;
+            transition: background-color 1s;
+        }
+
+        .envelope, .message, .response, .final-response, .last-message {
+            width: 300px;
+            height: 200px;
+            background-color: #ffccff; /* Light pink background for romance */
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: center;
+            transition: opacity 1s;
+        }
+
+        .envelope h1, .message h1, .response h1, .final-response h1, .last-message h1 {
+            color: #333;
+            font-size: 24px;
+            margin: 0; /* Remove default margins for better spacing */
+        }
+
+        .message {
+            display: none;
+        }
+
+        .response {
+            display: none;
+            flex-direction: column;
+        }
+
+        .response button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff99cc; /* Light pink button */
+            color: #333;
+        }
+
+        .final-response {
+            display: none;
+            flex-direction: column;
+        }
+
+        .last-message {
+            display: none; /* Hide this section initially */
+            flex-direction: column;
+            align-items: center; /* Center align the last message text */
+        }
+    </style>
+</head>
+<body>
+    <!-- Envelope Section -->
+    <div class="envelope" onclick="showMessage()">
+        <h1>Click to Open</h1>
+    </div>
+    
+    <!-- Message Section -->
+    <div class="message">
+        <h1>Actually, I like you.</h1>
+    </div>
+
+    <!-- Response Section -->
+    <div class="response">
+        <h1>Do you like me?</h1>
+        <button onclick="handleResponse(true)">Yes</button>
+        <button onclick="handleResponse(false)">No</button>
+    </div>
+
+    <!-- Final Response Section -->
+    <div class="final-response">
+        <h1></h1>
+    </div>
+
+    <!-- Last Message Section -->
+    <div class="last-message">
+        <h1>Take your time to think about us... 🥰</h1>
+        <h1>And please, don’t be angry with me!</h1>
+    </div>
+
+    <script>
+        function showMessage() {
+            // Hide the envelope and show the message
+            document.querySelector('.envelope').style.display = 'none';
+            document.querySelector('.message').style.display = 'flex';
+            document.body.style.backgroundColor = '#ffe6f0'; // Light pink background transition
+            
+            // Show the response options after the message
+            setTimeout(() => {
+                document.querySelector('.message').style.display = 'none'; // Hide the message
+                document.querySelector('.response').style.display = 'flex'; // Show response options
+            }, 2000); // Wait 2 seconds before showing response options
+        }
+
+        function handleResponse(isYes) {
+            // Hide response options
+            document.querySelector('.response').style.display = 'none';
+            const finalResponse = document.querySelector('.final-response');
+            finalResponse.style.display = 'flex';
+
+            // Display final response based on user choice
+let responseText = '';
+            if (!isYes) {
+                responseText = "You chose 'No', which means you actually like me! 💖";
+            } else {
+                responseText = "You chose 'Yes'! I knew it! 😍";
+            }
+            finalResponse.querySelector('h1').textContent = responseText;
+
+            // Simulate a delay before showing the last message
+            setTimeout(() => {
+                finalResponse.style.display = 'none'; // Hide the final response
+                document.querySelector('.last-message').style.display = 'flex'; // Show the last message
+            }, 3000); // 3 seconds delay before showing the last message
+        }
+    </script>
+</body>
+</html>
